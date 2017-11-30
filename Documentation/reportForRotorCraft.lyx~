@@ -1,0 +1,2472 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass book
+\begin_preamble
+
+\usepackage{xcolor}
+\definecolor{maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{halfgray}{gray}{0.55}
+\definecolor{ipython_frame}{RGB}{207, 207, 207}
+\definecolor{ipython_bg}{RGB}{247, 247, 247}
+\definecolor{ipython_red}{RGB}{186, 33, 33}
+\definecolor{ipython_green}{RGB}{0, 128, 0}
+\definecolor{ipython_cyan}{RGB}{64, 128, 128}
+\definecolor{ipython_purple}{RGB}{170, 34, 255}
+
+\usepackage{listings}
+\lstset{
+    breaklines=true,
+    %
+    extendedchars=true,
+    literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+%%
+%% Python definition (c) 1998 Michael Weber
+%% Additional definitions (2013) Alexis Dimitriadis
+%% modified by me (should not have empty lines)
+%%
+\lstdefinelanguage{iPython}{
+    morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},%
+    %
+    % Built-ins
+    morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern},%
+    %
+    sensitive=true,%
+    morecomment=[l]\#,%
+    morestring=[b]',%
+    morestring=[b]",%
+    %
+    morestring=[s]{'''}{'''},% used for documentation text (mulitiline strings)
+    morestring=[s]{"""}{"""},% added by Philipp Matthias Hahn
+    %
+    morestring=[s]{r'}{'},% `raw' strings
+    morestring=[s]{r"}{"},%
+    morestring=[s]{r'''}{'''},%
+    morestring=[s]{r"""}{"""},%
+    morestring=[s]{u'}{'},% unicode strings
+    morestring=[s]{u"}{"},%
+    morestring=[s]{u'''}{'''},%
+    morestring=[s]{u"""}{"""}%
+    %
+    % {replace}{replacement}{lenght of replace}
+    % *{-}{-}{1} will not replace in comments and so on
+    literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\EUR}}1 {£}{{\pounds}}1
+    %
+    {^}{{{\color{ipython_purple}\^{}}}}1
+    {=}{{{\color{ipython_purple}=}}}1
+    %
+    {+}{{{\color{ipython_purple}+}}}1
+    *{-}{{{\color{ipython_purple}-}}}1
+    {*}{{{\color{ipython_purple}$^\ast$}}}1
+    {/}{{{\color{ipython_purple}/}}}1
+    %
+    {+=}{{{+=}}}1
+    {-=}{{{-=}}}1
+    {*=}{{{$^\ast$=}}}1
+    {/=}{{{/=}}}1,
+    %
+    identifierstyle=\color{black}\ttfamily,
+    commentstyle=\color{ipython_cyan}\ttfamily,
+    stringstyle=\color{ipython_red}\ttfamily,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    %
+    rulecolor=\color{ipython_frame},
+    frame=single,
+    frameround={t}{t}{t}{t},
+    framexleftmargin=6mm,
+    numbers=left,
+    numberstyle=\tiny\color{halfgray},
+    %
+    %
+    backgroundcolor=\color{ipython_bg},
+    %   extendedchars=true,
+    basicstyle=\scriptsize,
+    keywordstyle=\color{ipython_green}\ttfamily,
+}
+\end_preamble
+\use_default_options true
+\begin_modules
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+EKF- MCT Project
+\end_layout
+
+\begin_layout Author
+Ashutosh, Manoj V
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Section
+Motivation:
+\end_layout
+
+\begin_layout Standard
+Micro Aerial Vehicles are inherently unstable and require an active stabilizatio
+n system.
+ After designing a control system, it is encoded into a microcontroller
+ board and tested on an actual system like quadcopters, RC Planes or helicopters.
+ Control system may not work due to the following,
+\end_layout
+
+\begin_layout Itemize
+Bugs in microcontroller code
+\end_layout
+
+\begin_layout Itemize
+Sensor system malfunction
+\end_layout
+
+\begin_layout Itemize
+Disturbances
+\end_layout
+
+\begin_layout Itemize
+Suboptimal gains in the controller
+\end_layout
+
+\begin_layout Standard
+It is desirable to have a hardware in loop simulator to debug few problems
+ before testing on the actual UAV.
+ In hardware in loop simulation, the Micro-controller Board (like Arduino,
+ ST Nucleo, Pixhawk etc) runs the actual flight control code and generates
+ the control inputs.
+ Instead of giving the control inputs to actual UAV, it is sent to a computer.
+ Computer program simulates the system, generates the next set of states(includi
+ng orientation angles) and sends them back to the Micro Controller Board.
+ Any mistakes can be corrected before the actual flight test.
+ Thereby saving a lot of time in Controller development.
+\end_layout
+
+\begin_layout Section
+Problems Worked on:
+\end_layout
+
+\begin_layout Itemize
+Dynamic model of helicopter
+\end_layout
+
+\begin_layout Itemize
+Quadcopter modelling and Kalman Filtering
+\end_layout
+
+\begin_layout Chapter
+Helicopter Dynamics Modelling
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+In this chapter helicopter equations are formulated for simulation.
+ 
+\end_layout
+
+\begin_layout Section
+Motor and ESC Model
+\end_layout
+
+\begin_layout Standard
+In case of speed variations, Motor and ESC dynamics will become important.
+ Modelling a BLDC motor accurately is more complex(because of 3 different
+ current in 3 wires which in turn depend on the ESC's inputs).
+ However simpler model can be done by assuming an equivalent DC motor.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-2"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Torque=K_{\tau}I_{rms}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Kv*K_{\tau}=1
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+BackEMF=\frac{\omega}{Kv}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Motor's Equation of motion becomes,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{rotor}\omega'=\frac{K_{\tau}}{R}\left(V_{rms}-\frac{\omega}{Kv}\right)-losses
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where, V is the RMS voltage supplied to the motor by the ESC.
+\end_layout
+
+\begin_layout Standard
+Typically ESC's operate at 8KHz switching frequency.
+ So at Half throttle, ESC gives PWM of 8KHz with 50% dutycycle to each phase
+ of motor.
+ This effectively supplies half of supply(Battery) voltage to the motor.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename motorPulses.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ESC Voltage outputs(https://evmc2.files.wordpress.com)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thereby our Motor ESC model becomes,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+I_{rotor}\omega'=\frac{K_{\tau}}{R}\left(V_{Bat}Th-\frac{\omega}{Kv}\right)-\tau_{AD}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\omega$
+\end_inset
+
+- Shaft's Angular speed
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $I_{rotor}$
+\end_inset
+
+- Inertia of Motor's rotor part along with Propeller/blades
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K_{\tau}$
+\end_inset
+
+- motor Torque constant
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{\ensuremath{bat}}$
+\end_inset
+
+- Battery's voltage
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Th$
+\end_inset
+
+- Inputs given to ESC(Scaled between 0.0-1.0)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Kv$
+\end_inset
+
+- Motor Back emf constant
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\tau_{AD}$
+\end_inset
+
+- Aerodynamic Torque experienced by the Blade/Propeller
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Assumptions Involved:
+\end_layout
+
+\begin_layout Itemize
+Bearing Friction, Resistive and Magnetic Losses neglected.
+\end_layout
+
+\begin_layout Itemize
+ESC Will not respond to inputs instantaneously, its dynamics are neglected.
+\end_layout
+
+\begin_layout Section
+Dynamic Inflow Model
+\end_layout
+
+\begin_layout Standard
+Pitt-Peters model has been used to get the induced inflow.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inflow is modelled as,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\lambda=\lambda_{0}+\lambda_{c}\bar{r}Cos(\psi_{w})+\lambda_{s}\bar{r}Sin(\psi_{w})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\psi_{w}=\psi-\Delta
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\lambda_{o},\lambda_{c},\lambda_{s}$
+\end_inset
+
+- dynamic Parameters governing inflow
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\bar{r}$
+\end_inset
+
+- dimensionless radius 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\psi_{w}-$
+\end_inset
+
+Azimuth angle measured from head wind direction
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\psi$
+\end_inset
+
+- Conventional Azimuth angle measured from -x axis of hub
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Delta-$
+\end_inset
+
+Angle between X and wind direction(on hub plane)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda_{m}=0.5(\begin{array}{ccc}
+1 & 0 & 0\end{array})\mathfrak{\mathcal{{L}}^{-1}}\left\{ \begin{array}{c}
+\lambda_{0}\\
+\lambda_{S}\\
+\lambda_{C}
+\end{array}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha=\arctan(\frac{\lambda_{m}+\mu_{c}}{\mu_{f}})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\bar{V}=\frac{\mu_{f}^{2}+(2\lambda_{m}+\mu_{c})(\lambda_{m}+\mu_{c})}{\mu_{f}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\bar{V_{T}}=\sqrt{\mu_{f}^{2}+\lambda_{m}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+[\bar{V]}=\left(\begin{array}{ccc}
+\bar{V_{T}} & 0 & 0\\
+0 & \bar{V} & 0\\
+0 & 0 & \bar{V}
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{{L}}=\left(\begin{array}{ccc}
+0.5 & -Bsin(\Delta) & -Bcos(\Delta)\\
+Bsin(\Delta) & Ecos^{2}(\Delta)+Dsin^{2}(\Delta) & (D-E)sin(\Delta)cos(\Delta)\\
+Bcos(\Delta) & (D-E)sin(\Delta)cos(\Delta) & Esin^{2}(\Delta)+Dcos^{2}(\Delta)
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+B 
+\begin_inset Formula $=\frac{15\pi}{64}\sqrt{\frac{1-sin(\alpha)}{1+sin(\alpha)}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+D 
+\begin_inset Formula $=\frac{4Sin(\alpha)}{1+Sin(\alpha)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+E-D
+\begin_inset Formula $=\frac{4(1-sin(\alpha))}{(1+sin(\alpha))}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+E =
+\begin_inset Formula $\frac{4}{1+sin(\alpha)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+[\widehat{L}]^{-1}=[\bar{V}]\mathcal{{L}}^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, we can get the inflow derivatives using the following first order
+ equation,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+M\left(\begin{array}{c}
+\mathring{\lambda_{0}}\\
+\mathring{\lambda_{S}}\\
+\mathring{\lambda_{C}}
+\end{array}\right)+[\widehat{L}]^{-1}\left(\begin{array}{c}
+\lambda_{0}\\
+\lambda_{S}\\
+\lambda_{C}
+\end{array}\right)=\left(\begin{array}{c}
+C_{T}\\
+-C_{l}\\
+-C_{m}
+\end{array}\right)_{Aerodynamic}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Blade Forces and Moments
+\end_layout
+
+\begin_layout Subsection
+Frames:
+\end_layout
+
+\begin_layout Subsection
+Velocities expression:
+\end_layout
+
+\begin_layout Standard
+Let Vp denote the in plane velocity on rotor disc and 
+\begin_inset Formula $V_{per}$
+\end_inset
+
+denote the perpendicular velocity(into the rotor disc)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{p}=r\Omega-V_{f}Sin(\psi-\Delta)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{per}=V_{i}+Vc+r\beta'+(\overrightarrow{\omega_{b}.j_{bl})}r
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $r$
+\end_inset
+
+ Distance from hub's center
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{f}$
+\end_inset
+
+ Forward velocity resolved in hub plane
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Vc$
+\end_inset
+
+ Climb Velocity(Climb implies positive Vc)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ Induced inflow
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\beta'$
+\end_inset
+
+ Flap angle derivative
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\vec{\omega_{b}}$
+\end_inset
+
+ Body/Helicopter's angular velocity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $j_{bl}$
+\end_inset
+
+ Blade's j axis(axis about flap)
+\end_layout
+
+\begin_layout Standard
+Normalizing the above equations with 
+\begin_inset Formula $R\Omega$
+\end_inset
+
+, we get ,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\bar{V}_{p}=\bar{r}-\mu_{f}Sin(\psi-\Delta)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\bar{V}_{per}=\bar{V}_{i}+\mu_{c}+\frac{\bar{r}\beta'}{\Omega}+(\overrightarrow{\omega_{b}.j_{bl})}\bar{\frac{r}{\Omega}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Angular velocity of body represented in hub frame is 
+\begin_inset Formula $\hat{\omega}_{b}=p\hat{i}+q\hat{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $j_{bl}=sin(\psi)\hat{i}+cos(\psi)\hat{j}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we get,
+\begin_inset Formula 
+\begin{align*}
+\bar{V}_{per} & =(\lambda_{0}+\mu_{c})+\bar{r}[\lambda_{s}Sin(\psi-\Delta)+\lambda_{c}Cos(\psi-\Delta)+\beta_{1s}cos(\psi)-\beta_{1c}sin(\psi)+\frac{pSin(\psi)+qCos(\psi)}{\Omega}]\\
+\bar{V_{per}} & =V_{per0}+\bar{r}K_{Vper}\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Aerodynamic Force on Single Blade:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+F_{a}=0.5\rho C(Cl_{\alpha})\int_{eR}^{R}dr(V{}_{p}^{2}\theta-V_{per}V_{p})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+F_{a}=0.5\rho C(Cl_{\alpha})R^{3}\Omega^{2}\int_{eR}^{R}d\bar{r}(\bar{V_{p}^{2}}\theta-\bar{V}_{per}\bar{V}_{p})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Grouping the constants together we get.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+F_{a}=K_{a}\int_{e}^{1}d\bar{r}(\bar{V_{p}^{2}}\theta-\bar{V}_{per}\bar{V}_{p})
+\end{equation}
+
+\end_inset
+
+Assuming linear twist Pitch angle becomes,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\theta=\theta_{0}+k_{\theta}\bar{r}+\theta_{c}Cos(\psi)+\theta_{S}Sin(\psi)=\theta_{1}+k_{\theta}\bar{r}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\theta_{0}-$
+\end_inset
+
+Collective pitch angle at root of the Blade
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $k_{\theta}-$
+\end_inset
+
+Slope of twist wrt to the radius(normalized)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $eR$
+\end_inset
+
+- Distance to the Flap hinge from the center of hub
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\theta_{1}=\theta_{0}+\theta_{c}Cos(\psi)+\theta_{S}Sin(\psi)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Substituting Velocities and pitch into the Force equation we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+F_{a}=Ka\left[\frac{k_{\theta}(1-e^{4})}{4}+\frac{(\theta_{1}-2k_{\theta}\mu_{f}Sin(\psi-\Delta)-K_{Vper})(1-e^{3})}{3}\right]\\
++Ka\left[k_{\theta}\mu_{f}^{2}Sin^{2}(\psi-\Delta)-2\mu_{f}Sin(\psi-\Delta)\theta_{1}+K_{Vper}\mu_{f}Sin(\psi-\Delta)-V_{per0}\right]\frac{(1-e^{2})}{2}\\
++Ka\left[\mu_{f}^{2}\theta_{1}Sin^{2}(\psi-\Delta)+\mu_{f}V_{per0}Sin(\psi-\Delta)\right](1-e)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Aerodynamic Moment about flap hinge:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Ma=RK_{a}\int_{e}^{1}d\bar{r}(\bar{V_{p}^{2}}\theta-\bar{V}_{per}\bar{V}_{p})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Substituting similar to the previous section we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+M_{a}=-RKa\left[\frac{k_{\theta}(1-e^{5})}{5}+\frac{(\theta_{1}-2k_{\theta}\mu_{f}Sin(\psi-\Delta)-K_{Vper})(1-e^{4})}{4}\right]\\
++RKa\left[k_{\theta}\mu_{f}^{2}Sin^{2}(\psi-\Delta)-2\mu_{f}Sin(\psi-\Delta)\theta_{1}+K_{Vper}\mu_{f}Sin(\psi-\Delta)-V_{per0}\right]\frac{(1-e^{3})}{3}\\
++RKa\left[\mu_{f}^{2}\theta_{1}Sin^{2}(\psi-\Delta)+\mu_{f}V_{per0}Sin(\psi-\Delta)\right]\frac{(1-e^{2})}{2}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Aerodynamic Moments in hub frame:
+\end_layout
+
+\begin_layout Standard
+Summing Aerodynamic Moment and Forces into hub frame we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Fa=\Sigma_{i=1}^{3}(Fa)_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Ma_{l}=\Sigma_{i=1}^{3}(Ma)_{i}Sin(\psi_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Ma_{m}=\Sigma_{i=1}^{3}(Ma)_{i}Cos(\psi_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, l and m represent roll and pitch respectively
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+C_{T}=\frac{T}{\rho A(\Omega R)^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+C_{l}=\frac{Ma_{l}}{\rho AR(\Omega R)^{2}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+C_{m}=\frac{Ma_{m}}{\rho AR(\Omega R)^{2}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These equations are used for getting Aerodynamic Moments and Forces in Pitt-Pete
+rs model.
+\end_layout
+
+\begin_layout Section
+Blade Dynamics
+\end_layout
+
+\begin_layout Standard
+Currently only Flap dynamics is taken into account.
+ Neglecting the coupling of Fuselage with the blade dynamics we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\beta^{xx}+\gamma_{\beta}^{2}\beta=\gamma Ma
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\gamma-$
+\end_inset
+
+Lock number of blade given by 
+\begin_inset Formula $\frac{\rho Cl_{\alpha}CR^{4}}{I_{b}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\gamma_{\beta}$
+\end_inset
+
+ Non Dimensionalized Flap Frequency given by 
+\begin_inset Formula $\sqrt{1+e\frac{S_{\beta}}{I_{\beta}}+\frac{K}{\Omega^{2}I_{\beta}}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{S_{\beta}}{BladeMass}-$
+\end_inset
+
+ Location of CG of blade from hinge
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K-$
+\end_inset
+
+Effective Torsional Spring constant at the hinge
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $I_{\beta}-$
+\end_inset
+
+Inertia about Flap hinge
+\end_layout
+
+\begin_layout Standard
+Converting the second order equation into State space form we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\dfrac{d\left(\begin{array}{c}
+\beta\\
+\beta^{x}
+\end{array}\right)}{d\psi}=\left(\begin{array}{cc}
+0 & 1\\
+-\gamma_{\beta}^{2} & 0
+\end{array}\right)\left(\begin{array}{c}
+\beta\\
+\beta^{x}
+\end{array}\right)+\left(\begin{array}{c}
+0\\
+\gamma Ma
+\end{array}\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This equation should be solved/integrated for each blade separately.
+\end_layout
+
+\begin_layout Section
+Forces and moments transferred to Fuselage:
+\end_layout
+
+\begin_layout Standard
+For a single blade, Force Fx transferred to fuselage is given by(in blade's
+ x axis)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Fx|_{bl}=\Omega^{2}(r_{cg}+eR)M-FaSin(\beta)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Moment transfer in y direction(blade) is given by,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+M_{y_{bl}}=K(\beta)+(eR)Fa
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Force due to drag is yet to be formulated.
+ It will be done along with tail rotor modelling later.
+\end_layout
+
+\begin_layout Subsection
+Blade to Hub frame transformation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\left(\begin{array}{c}
+Fx\\
+Fy\\
+Fz
+\end{array}\right)_{hub}=\left(\begin{array}{ccc}
+-cos(\psi) & sin(\psi) & 0\\
+sin(\psi) & cos(\psi) & 0\\
+0 & 0 & -1
+\end{array}\right)\left(\begin{array}{c}
+Fx\\
+Fy\\
+Fz
+\end{array}\right)_{blade}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After transformation, the Forces and Moments from 3 blades should be summed
+ up in hub frame.
+\end_layout
+
+\begin_layout Section
+Fuselage Dynamics
+\end_layout
+
+\begin_layout Subsection
+Dynamics equations
+\end_layout
+
+\begin_layout Standard
+Deriving equations of motion in a general form we get,
+\begin_inset Formula 
+\begin{equation}
+C_{BI}(\ddot{Rc})=\frac{\Sigma F}{m}-\dot{\omega}^{x}r_{cg}-\omega^{x}(\omega^{x}r_{cg})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+I\dot{\omega}=\Sigma M-\omega^{x}I\omega-r_{cg}^{x}(C_{BI}\ddot{Rc})m
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $c_{BI}$
+\end_inset
+
+-Transformation matrix to get to body frame.
+ Here inertial frame is ground frame(NED)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Rc-$
+\end_inset
+
+Location of the reference point on body represented in the ground frame.
+ This may not be the center of mass
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma F-$
+\end_inset
+
+Total force acting on the Helicopter represented in Body frame
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\dot{\omega}^{x}$
+\end_inset
+
+- Cross product matrix of angular acceleration of helicopter represented
+ in body frame
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $r_{cg}-$
+\end_inset
+
+Location of center of gravity from the reference point on body.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $m-$
+\end_inset
+
+mass of helicopter
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+I- Moment of Inertia about reference point on Helicopter
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma M-$
+\end_inset
+
+Total Moment acting on helicopter represented in body frame
+\end_layout
+
+\begin_layout Subsection
+Kinematic equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{dq(t)}{dt}=\frac{1}{2}q(t)\times\omega
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Integration accumulates errors.
+ Partly this problem can be mitigated by Normalizing the quaternion at each
+ time step.
+ After each step, all the coefficients that change in the expression are
+ to be updated and next step should be done
+\end_layout
+
+\begin_layout Section
+ODE Solvers in Python
+\end_layout
+
+\begin_layout Standard
+Few Solvers available in Scipy Library of python are
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-8"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+VODE- Variable Coefficient ODE solver
+\end_layout
+
+\begin_layout Enumerate
+ZVODE-Complex VODE
+\end_layout
+
+\begin_layout Enumerate
+LSODA- This solver works with both stiff and Non-stiff problems
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-3"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+DOPRI5(Dormand-Prince)- Uses RK4 method for integration and takes the difference
+ between 5th order propagation and 4th order propagation as error.
+ Its does Step Size Control.
+\end_layout
+
+\begin_layout Standard
+LSODA solver can be accessed by using odeint function from SciPy's(Scientific
+ Python) Integration package.
+ 
+\end_layout
+
+\begin_layout Section
+Remaining Work:
+\end_layout
+
+\begin_layout Itemize
+Drag force acting on blade
+\end_layout
+
+\begin_layout Itemize
+Tail rotor 
+\end_layout
+
+\begin_layout Itemize
+Including the coupling of fuselage motion on flap dynamics
+\end_layout
+
+\begin_layout Itemize
+Build a centralized function for updating the variables after each iteration
+\end_layout
+
+\begin_layout Itemize
+Gravity should be included in fuselage Forces
+\end_layout
+
+\begin_layout Itemize
+Controller is not implemented yet
+\end_layout
+
+\begin_layout Chapter
+Quad-copter Modeling and Filtering
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+In this chapter, an Extended Kalman filter(EKF) was implemented over experimenta
+l data collected using a quad-copter(running on Pixhawk flight controller).
+ This was done as a part of MCT(Modern Control Theory) along with Ashutosh,
+ Third Year Undergraduate, Engineering Design.
+ EKF requires a model for its working.
+ A first principles model was developed and used for this project.
+\end_layout
+
+\begin_layout Section
+First Principles Model
+\end_layout
+
+\begin_layout Subsection
+System States:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\begin{array}{cccccccccccc}
+(X & Y & Z & Vx & Vy & Vz & \omega_{x} & \omega_{y} & \omega_{z} & yaw & pitch & roll\end{array}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+where,
+\end_layout
+
+\begin_layout Itemize
+3-2-1 convention is adopted for the angles Yaw,pitch,Roll
+\end_layout
+
+\begin_layout Itemize
+Positions and velocities are written wrt ground frame in NED frame
+\end_layout
+
+\begin_layout Itemize
+Angular velocities are in body frame
+\end_layout
+
+\begin_layout Subsection
+Kinematics relations
+\end_layout
+
+\begin_layout Standard
+The following equation is derived for getting roll,yaw and pitch derivatives
+ from the angular velocity,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+\dot{r}\\
+\dot{p}\\
+\dot{y}
+\end{array}\right]=\left(\begin{array}{ccc}
+1 & tan(p)Sin(r) & tan(p)cos(r)\\
+0 & cos(r) & -sin(r)\\
+0 & tan(r) & cos(r)sec(p)
+\end{array}\right)\left[\begin{array}{c}
+r\\
+p\\
+y
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However Matlab symbolic package takes a long time to process such matrix.
+ It has been simplified further
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\left[\begin{array}{c}
+\dot{r}\\
+\dot{p}\\
+\dot{y}
+\end{array}\right]=\left(\begin{array}{ccc}
+1 & 0 & p\\
+0 & 1 & -r\\
+0 & r & 1
+\end{array}\right)\left[\begin{array}{c}
+r\\
+p\\
+y
+\end{array}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the last equation is not valid at high angle maneuvers.
+\end_layout
+
+\begin_layout Subsection
+Forces
+\end_layout
+
+\begin_layout Standard
+For hover condition one can write the following equations and the constants
+ involved can be obtained from UIUC Propeller database
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-9"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Thrust,T=K_{T}\Omega^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Torque,\tau=K_{\tau}\Omega^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Neglecting Motor dynamics we can write(Approximately),
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+T=C_{th}\times(throttle)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+Throttle/Th is the input signal given to ESC(Scaled between 0-1.0).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $C_{th}$
+\end_inset
+
+Constant connecting throttle to thrust(determined experimentally)
+\end_layout
+
+\begin_layout Standard
+Adding force due to gravity and the 4 propellers, we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\Sigma F}{m}=\left(\begin{array}{c}
+0\\
+0\\
+g
+\end{array}\right)+\frac{C_{IB}}{m}\left(\begin{array}{c}
+0\\
+0\\
+\Sigma(Th)_{i}
+\end{array}\right)C_{th}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Moments
+\end_layout
+
+\begin_layout Standard
+Let L be the arm length for quad copter(half of diagonal).
+\end_layout
+
+\begin_layout Standard
+We obtain moments as,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Mx=(-Th_{1}+Th_{2}+Th_{3}-Th_{4})\times\frac{L}{\sqrt{2}}C_{th}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+My=(Th_{1}-Th_{2}+Th_{3}-Th_{4})\times\frac{L}{\sqrt{2}}C_{th}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Mz=(Th_{1}+Th_{2}-Th_{3}-Th_{4})\times\frac{L}{\sqrt{2}}C_{th}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Translation Dynamics
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{equation}
+C_{BI}(\ddot{Rc})=\frac{\Sigma F}{m}-\dot{\omega}^{x}r_{cg}-\omega^{x}(\omega^{x}r_{cg})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Adopting the earlier conventions used in helicopter's case.
+\end_layout
+
+\begin_layout Standard
+Neglecting the off set between cg and reference point on quad copter, we
+ get ,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\ddot{Rc}=(C_{BI}^{-1}\frac{\Sigma F}{m})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Simplifying the Rotation matrix we get,
+\end_layout
+
+\begin_layout Standard
+Cbi_approx=[1, psi, -theta;-psi,1,phi;theta,-phi,1];
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+C_{BI}^{-1}=\left(\begin{array}{ccc}
+1 & -y & p\\
+y & 1 & -r\\
+-p & r & 1
+\end{array}\right)
+\]
+
+\end_inset
+
+ Substituting forces, we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\ddot{Rc}=\frac{1}{m}\left(\begin{array}{c}
+pitch(C_{th})\Sigma Th_{i}\\
+-r(C_{th})\Sigma Th_{i}\\
+(C_{th})\Sigma Th_{i}
+\end{array}\right)+\left(\begin{array}{c}
+0\\
+0\\
+g
+\end{array}\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Rotational Dynamics
+\end_layout
+
+\begin_layout Standard
+Starting with Euler equations,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\dot{\omega_{x}}=\frac{Mx}{Ixx}+\frac{Iyy-Izz}{Ixx}\omega_{y}\omega_{z}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\dot{\omega_{y}}=\frac{My}{Iyy}+\frac{Izz-Ixx}{Iyy}\omega_{x}\omega_{z}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\dot{\omega_{z}}=\frac{Mz}{Izz}+\frac{Ixx-Iyy}{Izz}\omega_{y}\omega_{x}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since Angular velocities are small for a stable flight.
+ We can neglect the coupling terms.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\dot{\omega_{x}}=\frac{Mx}{Ixx}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\dot{\omega_{y}}=\frac{My}{Iyy}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\dot{\omega_{z}}=\frac{Mz}{Izz}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Model in SS form 
+\end_layout
+
+\begin_layout Standard
+Putting all the equations together into SS matrix we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+X'=AX+BU+K
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+A=\left[\begin{array}{cccccccccccc}
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & pr & p & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -r & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & r & 1 & 0 & 0 & 0
+\end{array}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+let 
+\begin_inset Formula $km=\frac{L\times C_{th}}{\sqrt{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+B=\left[\begin{array}{cccc}
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+\frac{P(C_{th})}{m} & \frac{P(C_{th})}{m} & \frac{P(C_{th})}{m} & \frac{P(C_{th})}{m}\\
+\frac{-r(C_{th})}{m} & \frac{-r(C_{th})}{m} & \frac{-r(C_{th})}{m} & \frac{-r(C_{th})}{m}\\
+\frac{(C_{th})}{m} & \frac{(C_{th})}{m} & \frac{(C_{th})}{m} & \frac{(C_{th})}{m}\\
+-km & km & km & -km\\
+km & -km & km & -km\\
+km & km & -km & -km\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{array}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+K=\left[\begin{array}{c}
+0\\
+0\\
+0\\
+0\\
+0\\
+g\\
+0\\
+0\\
+0\\
+0\\
+0\\
+0
+\end{array}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The model is given to Matlab in symbolic form and linearized and discretized
+ model was obtained.
+ 
+\end_layout
+
+\begin_layout Section
+Data Acquisition
+\end_layout
+
+\begin_layout Standard
+Data from the following sensors were acquired using Pixhawk flight controller
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-6"
+
+\end_inset
+
+.
+ Pixhawk does not store all the data.
+ Its log contains data at a lower rate.
+ Timescales at which data is available is also given below,
+\end_layout
+
+\begin_layout Itemize
+IMU- 40ms
+\end_layout
+
+\begin_layout Itemize
+Barometer- 100ms
+\end_layout
+
+\begin_layout Itemize
+Sonar - 50ms
+\end_layout
+
+\begin_layout Itemize
+GPS- 180ms
+\end_layout
+
+\begin_layout Standard
+Along with that user inputs(Set points) and the output of controller(throttles)
+ are also logged.
+\end_layout
+
+\begin_layout Standard
+Data is collected and arranged in chronological order with a tag containing
+ the sensor No.
+ 
+\end_layout
+
+\begin_layout Standard
+Since data do not come at same data rate, it poses some challenge to do
+ Kalman filter.
+ Our KF runs every 10mS once.
+ Any data that comes within that duration will be put together as Y/measurements.
+ C matrix will be formed accordingly every time(If barometer and Sonar data
+ came within 10ms, then their individual C matrix will be appended together
+ and used).
+ If no data came in that 10ms duration then kalman filter will skip the
+ correction part and proceed to the next prediction step.
+\end_layout
+
+\begin_layout Standard
+For getting the measurement covariance matrix, a static test run was conducted.
+ Thereby we got the variances in each sensor data.
+\end_layout
+
+\begin_layout Subsection
+Estimation of Roll and Pitch from Accelerometer:
+\end_layout
+
+\begin_layout Standard
+Accelerometer responds to both Acceleration due to gravity and actual accelerati
+on of body.
+ hence in static cases accelerometer can be used to determine roll and pitch
+ angles.
+ However in case of dynamic environment, a low pass filter should be applied
+ to the obtained angles.
+ In our case, Since kalman filter can take care of the noise, we assumed
+ rest case and determined Roll and pitch angle using accelerometer.
+ Since Integration is susceptible to drift, Gyroscopes data alone was not
+ enough to get proper pitch and roll angles.
+ Hence Accelerometer data was used
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-4"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+0\\
+0\\
+g
+\end{array}\right]=C_{IB}\left(\begin{array}{c}
+a_{x}\\
+a_{y}\\
+a_{z}
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $a_{x,y,z}-$
+\end_inset
+
+ accelerometer data in body frame
+\end_layout
+
+\begin_layout Standard
+For calibrated Accelerometers in static case.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g=\sqrt{(a_{x}^{2}+a_{y}^{2}+a_{z}^{2})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Making small angle approximation we get,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+pitch=\frac{a_{x}}{\sqrt{(a_{x}^{2}+a_{y}^{2}+a_{z}^{2})}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Roll=\frac{-a_{y}}{\sqrt{(a_{x}^{2}+a_{y}^{2}+a_{z}^{2})}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Kalman Filter
+\end_layout
+
+\begin_layout Subsection
+Prediction:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X_{k+1|k}=A_{d}X_{k|k}+B_{d}u_{k}+bias
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{K+1|k}=A_{d}X_{k+1|k}A_{d}^{T}+Q
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $A_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{d}$
+\end_inset
+
+ are also function of states and computed at each instant
+\end_layout
+
+\begin_layout Subsection
+Kalman Gain:
+\end_layout
+
+\begin_layout Standard
+Kalman gain is only calculated when at least one sensor measurements are
+ available,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K=P_{k+1|k}\times C^{T}(C\times P_{k+1|k}\times C^{T}+R)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where,
+\end_layout
+
+\begin_layout Standard
+R- Measurement Covariance matrix(appended based on what sensor readings
+ are available)
+\end_layout
+
+\begin_layout Standard
+C- Measurement Model(Appended from individual sensor models)
+\end_layout
+
+\begin_layout Subsection
+Correction:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Y_{k+1|k}=C\times X_{k+1|k}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X_{k+1|k+1}=X_{k+1|k}+K(Y_{measured}-Y_{k+1|k})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{K+1|K+1}=(I-KC)\times P_{k+1|k}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Correction step will only happen if at least one sensor readings are available
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename height.svg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename yaw.svg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pitch.svg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename roll.svg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusion:
+\end_layout
+
+\begin_layout Standard
+Altitude Graph is in good agreement with the Pixhawk's EKF.
+ Since magnetometer data is not being used, filtered Yaw is an under estimate.
+ Roll and Pitch follow the trend but they have a bias.
+ This could be due to accelerometer calibration issue.
+ These results were obtained neglecting the bias(due to gravity) and Input
+ part of predictor.
+ Input model(B matrix) does not seem to be correct.
+ It causes a drift in the estimates.
+ A gray box model will be obtained using System Identification toolbox and
+ first principles model will be verified later.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Peters 1988"
+key "key-1"
+
+\end_inset
+
+Technical Note: Dynamic Inflow for Practical Applications 1988
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Microchip"
+key "key-2"
+
+\end_inset
+
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+ww1.microchip.com/downloads/en/AppNotes/00857B.pdf
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "solvers"
+key "key-3"
+
+\end_inset
+
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://lh3lh3.users.sourceforge.net/solveode.shtml
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "hobbytronics"
+key "key-4"
+
+\end_inset
+
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.hobbytronics.co.uk/accelerometer-info
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Leishman"
+key "key-5"
+
+\end_inset
+
+Principles of Helicopter Aerodynamics.
+ J.
+ Gordon Leishman
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Pixhawk"
+key "key-6"
+
+\end_inset
+
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://ardupilot.org/copter/docs/common-downloading-and-analyzing-data-logs-in-mi
+ssion-planner.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "scipyOde"
+key "key-8"
+
+\end_inset
+
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "UIUC Propeller database"
+key "key-9"
+
+\end_inset
+
+J.B.
+ Brandt, R.W.
+ Deters, G.K.
+ Ananda, and M.S.
+ Selig (Nov 30, 2017), UIUC Propeller Database, University of Illinois at
+ Urbana-Champaign, retrieved from 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://m-selig.ae.illinois.edu/props/propDB.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
