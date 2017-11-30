@@ -1,0 +1,3 @@
+http://www.hobbytronics.co.uk/accelerometer-info
+http://ardupilot.org/copter/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.html
+http://ardupilot.org/dev/docs/extended-kalman-filter.html#extended-kalman-filter

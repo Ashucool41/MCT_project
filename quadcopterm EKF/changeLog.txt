@@ -1,0 +1,26 @@
+change log For removing gps stuff and building ekf for the first time
+
+1)gps lines commented out
+2)variables made global
+3)dimensional parameter setup like L, Ct and other constants
+4)torqByThrust
+5)[phi;theta;psi] fetch measurements
+6) clear all in fetchModel
+7)predict function Bd_numeric=subs(Bd,X_syms,Xk); mistake
+8)fetch measurements__ include uk also
+9)double()
+10)effect of Normal reaction on ground :(
+11)INERTIA MATRRIX NOT YET INCLUDED
+12)remove multiple copies of Ts
+13)loop index cupped K
+14)preallocated  X_filteredData(:,index_loop)=Xk;%Storing the
+15)using matlabFunction instead of subs()
+16)   index2=sortedData(:,2)>=t-Ts*10^6;
+17)Cbi_function
+18)K going to inf
+19)Rvec should not be the output in fetchMeasurements
+20)wrong A matrix used
+21)Acceleration data must be used to directly compute the angles. because gyro integrated data is prone to drifting
+22)ACCELEROMETER DATA NOT USED FULLY
+23)gyroRadvar=(pi/180)^2*IMU_gyroVar;
+24)  velVar=Ts^2*IMU_accVar;
