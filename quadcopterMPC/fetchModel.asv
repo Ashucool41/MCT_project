@@ -1,0 +1,6 @@
+%general non-linear equation for system model
+syms A B Xk Xk_prev Uk Uk_prev
+
+
+Xk = A*Xk_prev + B*Uk_prev; % linearised control model (approximated)
+
