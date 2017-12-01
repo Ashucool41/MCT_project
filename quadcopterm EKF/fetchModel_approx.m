@@ -1,4 +1,4 @@
-%%INERTIA NOT INCLUDED YET 
+%%INERTIA NOT INCLUDED YET, signs are wrong- linearisation is wrong 
 %continous state space model parameters
 
 global X_syms Ts Cbi Cbi_approx Ad Bd

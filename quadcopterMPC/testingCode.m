@@ -1,17 +1,18 @@
 %Just for testing things. Refer master file for mpc implementation
 clear all
 %Controller parameters
-P=50;
-M=20;
-Qx=diag([1 1 1 1 1 1 0 0 0 0 0 0]);
-lambda=1;
+P=5;
+M=4;
+Qx=diag([1, 1, 5, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+%Importance given to states
+lambda=0.01; %Importance given to inputs
 
 %get the model
 fetchModel;
 
 %setpoints and current state
-Xk  = [0 0 0 0 0 0 0 0 0 0 0 0]';
-Xref= [0 0 10 0 0 0 0 0 0 0 0 0]';
+Xk  = [0 0 5 0 0 0 0 0 0 0 0 0]';
+Xref= [0 0 5 0 0 0 0 0 0 0 0 0]';
 
 %get MPC formulation in QP form
 [H,f_func]=fetchQPformulation(Ad,Bd,Bias_discrete,Qx,lambda,P,M);
