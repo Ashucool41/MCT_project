@@ -7,9 +7,14 @@ global x y z vx vy vz  wx wy wz phi theta psi
 global Ad_function Bd_function Cbi_function
 
 syms x y z vx vy vz  wx wy wz phi theta psi 
+syms u1 u2 u3 u4
 X_syms = [x; y; z; vx; vy; vz;  wx; wy; wz; phi; theta; psi];
+U_syms = [u1;u2;u3;u4];
 %% MODEL PARAMETERS
-Cth =9.8; %Newton/unit throttle 
+Cth =0.75*9.8;%Newton/unit throttleInput 750gm thrust C2830 motor+10X4.5 
+%inch propeller(http://www.rcbazaar.com/product.aspx?productid=1905)
+%Note that all inputs(to esc--pulse width(uS)) mentioned here are scaled 
+%between 0.0-1.0 for conveniance sake 
 L =0.45/2; %(half length of quad diagonal)
 torqByThrust= 0.0162;
 
@@ -46,8 +51,6 @@ B_model = [zeros(3,4);B_vel_part;B_w_part;zeros(3,4)];
 
 %% Linearisation and discretisation(Symbolic!!!)
 
-%Ad = expm(A_model*Ts); %discretised. this should be changed slightly
-%Ap = jacobian(A_model*X,X); % jacobian. This matrix is supposed to be used every where for discretised A matrix
 
 A_linearised=jacobian(A_model*X_syms,X_syms);
 Ad=expm(A_linearised*Ts); %linearised discrete symbolic model(takes 30secs). PLug in the states when needed
