@@ -17,11 +17,11 @@ Cth =0.75*9.8;%Newton/unit throttleInput 750gm thrust C2830 motor+10X4.5
 %between 0.0-1.0 for conveniance sake 
 L =0.45/2; %(half length of quad diagonal)
 torqByThrust= 0.0162;
-
 mass = 1.5;
 Ixx=0.0142;
 Iyy=Ixx;
 Izz=0.0284;
+
 %% A_continuous and B_continous
 A_model = sym('b',[12,12])*0;
 A_model(1,4) = 1;

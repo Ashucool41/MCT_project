@@ -32,7 +32,7 @@ global Ts % X_syms  Cbi Cbi_approx Ad Bd
 global sortedData
 global theta_accVar roll_accVar
 
-Ts = .01;  %sampling time in seconds
+Ts = 0.010;  %sampling time in seconds
 
 fetchModel_approx %script to get expression/symbolic matrix for B,jacobian() Ad=jacobian found
 sortedData=csvread('Sorted_time_wise.csv'); % read the data log file
@@ -83,7 +83,6 @@ for index_loop=2:N
         Pk=P_corr;
         %disp('sensor data coming')
         %disp(KalmanGain)
-
     else
         Xk=X_pred;
         Pk=P_pred;
