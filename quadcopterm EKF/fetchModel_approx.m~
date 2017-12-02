@@ -1,7 +1,7 @@
-
+%%INERTIA NOT INCLUDED YET, signs are wrong- linearisation is wrong 
 %%Prediction expression can use accurate model itself
-%Ts comes from the main script. Without a value for timestep this code wont
-%run
+%continous state space model parameters
+
 global X_syms Ts Cbi Cbi_approx Ad Bd
 global x y z vx vy vz  wx wy wz phi theta psi 
 global Ad_function Bd_function Cbi_function
@@ -63,24 +63,7 @@ Bias_model = [0 0 0 0 0 9.81 0 0 0 0 0 0]';
 % Cbi_function=matlabFunction(Cbi);
 % %NOTE: This is first principles model
 
-%% PROPER LINEARISATION about any operating point
+%% PROPER LINEARISATION
 A_linearised=jacobian(A_model*X_syms+B_model*U_syms,X_syms);
 B_linearised=B_model;%But X0 and U0 points about linearisation should be substituted:)
-Bias_linearised=Bias_model+A_model*X_syms-A_linearised*X_syms;
-
-%% Discretisation
-%Note that we are discretising about some operating point. So the following
-%symbolic expressions are functions for the current operating point.
-syms tau %for integration a time variable is required
-Ad=expm(A_linearised*Ts);
-temp1=expm(A_linearised*tau);
-Bd=int(temp1,tau,0,Ts)*B_linearised;
-Bias_discretised=int(temp1,tau,0,Ts)*Bias_linearised;
-
-%% Convert Symbolic model to Functions
- Ad_function=matlabFunction(Ad);
- Bd_function=matlabFunction(Bd);
- BiasD_function=matlabFunction(Bias_discretised);
- Cbi_function=matlabFunction(Cbi);
-
-
+Bias_linearised=Bias_model+A_model*X_syms-()
