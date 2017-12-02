@@ -4,7 +4,7 @@
 %run
 global X_syms Ts Cbi Cbi_approx Ad Bd
 global x y z vx vy vz  wx wy wz phi theta psi 
-global Ad_function Bd_function Cbi_function
+global Ad_function Bd_function Cbi_function BiasD_function
 
 syms x y z vx vy vz  wx wy wz phi theta psi 
 syms u1 u2 u3 u4
