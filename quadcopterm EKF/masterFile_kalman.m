@@ -29,7 +29,7 @@ close all
 global IMU_gyroVar IMU_accVar sonarVar sonarBias baroVar baroBias IMU_gyroBias IMU_accBias
 global Ts % X_syms  Cbi Cbi_approx Ad Bd
 %global x y z vx vy vz  wx wy wz phi theta psi %%These the 12 states taken
-global sortedData
+global sortedData home GPS_xyVar GPS_zVar
 global theta_accVar roll_accVar
 
 Ts = .01;  %sampling time in seconds
@@ -37,7 +37,7 @@ Ts = .01;  %sampling time in seconds
 fetchModel_approx %script to get expression/symbolic matrix for B,jacobian() Ad=jacobian found
 sortedData=csvread('Sorted_time_wise.csv'); % read the data log file
 %% SETTINGS
-%home =GPShomeLoc(); %first gps lat lon and alt for GPS data
+home = [12.9917,80.2311,3.2300]; %first gps lat lon and alt for GPS data
 IMU_gyroVar=2.3675e-04;%*N means multiplied by N times more than the static test vareince
 IMU_accVar=0.03;
 IMU_gyroBias=[-3.3102e-04;-9.9700e-04;-8.3456e-04];
@@ -48,8 +48,8 @@ baroVar=0.0915;
 baroBias=0.5413;
 theta_accVar=IMU_accVar/(9.81)^2; %determined using the formula used for angle estimation from accelerometer. refer getIMU.m
 roll_accVar=IMU_accVar/(9.81)^2;
-%GPS_xyVar=
-%GPS_zVar=
+GPS_xyVar=0.342;
+GPS_zVar=0.6312;
 Q=eye(12)*0.00001;%This is equation error's variance
 Q(3,3)=0.0001; Q(6,6)=0.00001;
 Q(7,7)=0.0001;   Q(8,8)=Q(7,7);Q(9,9)=Q(7,7);
@@ -69,9 +69,10 @@ tic
 
 %% EKF LOOP
 disp('ekf loop started')
-for index_loop=2:N
-    %disp(index_loop)
-    [R,C,Y_meas,uk_new]=fetchMeasurements(T0,index_loop,Xk); %past measurement is needed for integrating accelerometer measurement in the current formulation of ekf
+index_loop = 0;
+for index_loop = 2:N
+    disp(index_loop)
+    [R,C,Y_meas,uk_new]=fetchMeasurements(T0, index_loop, Xk); %past measurement is needed for integrating accelerometer measurement in the current formulation of ekf
          if(isempty(uk_new)==false)%check whether the input signal changed and update uk
              uk=uk_new;
          end        
@@ -110,5 +111,14 @@ figure
 plot((1:N)*Ts,-X_filteredData(3,:))
 xlabel('time in s')%Altitude in normal human +ve coordinates
 title('Height in meters')
+figure
+plot((1:N)*Ts,X_filteredData(2,:))
+xlabel('time in s')%Altitude in normal human +ve coordinates
+title('y in meters')
+figure
+plot((1:N)*Ts,X_filteredData(1,:))
+xlabel('time in s')%Altitude in normal human +ve coordinates
+title('x in meters')
+
 display('roll mean')
 display(mean(X_filteredData(10,:)*180/pi));%roll angles' mean

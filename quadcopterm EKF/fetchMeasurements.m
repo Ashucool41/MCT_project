@@ -1,9 +1,10 @@
 function [R,C,Y,uk] = fetchMeasurements(T0,timeStep_k,Xk)
    global  Ts    Cbi_function
    global sortedData
+   
    t=Ts*(10^6)*timeStep_k+T0;%Ts in secs, T0 in micro secs, t is in micros
    %Cib_numerical=transpose(subs(Cbi,[phi;theta;psi],Xk(10:12)));
-   Cib_numerical=transpose(Cbi_function(Xk(10),Xk(11),Xk(12)));
+   Cib_numerical = transpose(Cbi_function(Xk(10),Xk(11),Xk(12)));
    vx_num=Xk(4);
    vy_num=Xk(5);
    vz_num=Xk(6);
@@ -28,12 +29,13 @@ function [R,C,Y,uk] = fetchMeasurements(T0,timeStep_k,Xk)
            Y = [Y;Ytemp];
            Rvec = [Rvec;Rvec_temp];
        end
-%        if(data(i,1)==2)
-%            [Ctemp,Ytemp,Rvec_temp] = getGPS(data(i,:));
-%            C = [C;Ctemp];
-%            Y = [Y;Ytemp];
-%            Rvec = [Rvec;Rvec_temp];
-%        end
+       if(data(i,1)==2)
+           disp('gps_fetched');
+           [Ctemp,Ytemp,Rvec_temp] = getGPS(data(i,:));
+           C = [C;Ctemp];
+           Y = [Y;Ytemp];
+           Rvec = [Rvec;Rvec_temp];
+       end
        if(data(i,1)==3)
            [Ctemp,Ytemp,Rvec_temp] = getBaro(data(i,:));
            C = [C;Ctemp];
@@ -60,4 +62,3 @@ function [R,C,Y,uk] = fetchMeasurements(T0,timeStep_k,Xk)
    %have.
    
 end
-
