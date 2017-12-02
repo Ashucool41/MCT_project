@@ -1,4 +1,5 @@
 %%INERTIA NOT INCLUDED YET, signs are wrong- linearisation is wrong 
+%%Prediction expression can use accurate model itself
 %continous state space model parameters
 
 global X_syms Ts Cbi Cbi_approx Ad Bd

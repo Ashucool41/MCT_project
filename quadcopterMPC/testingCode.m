@@ -10,9 +10,9 @@ lambda=0.01; %Importance given to inputs
 %get the model
 fetchModel;
 
-%setpoints and current state
-Xk  = [0 0 5 0 0 0 0 0 0 0 0 0]';
-Xref= [0 0 5 0 0 0 0 0 0 0 0 0]';
+%setpoints and current state(NED frame is followed!!!)
+Xk  = [0 0 -5 0 0 0 0 0 0 0 0 0]';
+Xref= [0 0 -6 0 0 0 0 0 0 0 0 0]';
 
 %get MPC formulation in QP form
 [H,f_func]=fetchQPformulation(Ad,Bd,Bias_discrete,Qx,lambda,P,M);
