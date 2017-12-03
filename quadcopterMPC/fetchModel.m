@@ -1,7 +1,7 @@
-syms A B Xk Xk_prev Uk Uk_prev
 
 syms x y z vx vy vz  wx wy wz phi theta psi 
 X_syms = [x; y; z; vx; vy; vz;  wx; wy; wz; phi; theta; psi];
+global Ad Bd Bias_discrete
 %% MODEL PARAMETERS
 Cth =0.75*9.8;%Newton/unit throttleInput 750gm thrust C2830 motor+10X4.5 
 %inch propeller(http://www.rcbazaar.com/product.aspx?productid=1905)
@@ -60,5 +60,5 @@ Bd=double(Bd);
 Bias_discrete=int(temp1,tau,0,Ts)*CnstBias;
 Bias_discrete=double(Bias_discrete);
 %Now we have obtained Ad,Bd and Bias term for discrete model of linearised
-%system equations
+%system equations. 
 
